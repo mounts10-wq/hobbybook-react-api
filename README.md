@@ -1,0 +1,1 @@
+HobbyStack is a React application that helps users discover learning resources for hobbies and creative projects. Users can search for a hobby, view book/resource results from the Open Library API, and save useful resources to their personal stack.
