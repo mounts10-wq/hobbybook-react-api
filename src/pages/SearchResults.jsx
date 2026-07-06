@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { searchBooks } from "../services/openLibraryApi";
+import BookCard from "../components/BookCard";
 
 function SearchResults() {
   const [query, setQuery] = useState("");
@@ -54,14 +55,8 @@ function SearchResults() {
 
       <div className="book-grid">
         {books.map((book) => (
-          <article key={book.key} className="book-card">
-            <h3>{book.title}</h3>
-            <p>{book.author_name?.join(", ") || "Unknown author"}</p>
-            <p>
-              First published: {book.first_publish_year || "Unknown"}
-            </p>
-          </article>
-        ))}
+  <BookCard key={book.key} book={book} />
+))}
       </div>
     </section>
   );
