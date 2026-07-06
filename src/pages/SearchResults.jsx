@@ -76,7 +76,12 @@ function SearchResults() {
 
         <button type="submit">Search</button>
       </form>
-
+       {books.length > 0 && !loading && (
+  <p className="results-count">
+    Showing {books.length} resources for "{query}"
+  </p>
+)}
+ 
       {loading && <p>Loading resources...</p>}
       {error && <p className="error-message">{error}</p>}
 

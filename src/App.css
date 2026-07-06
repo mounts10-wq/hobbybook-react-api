@@ -195,3 +195,9 @@ body {
 .hobby-tag:hover {
   background: #bfdbfe;
 }
+
+.results-count {
+  font-weight: bold;
+  color: #374151;
+  margin-top: 1rem;
+}
