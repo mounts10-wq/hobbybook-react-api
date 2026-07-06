@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { searchBooks } from "../services/openLibraryApi";
 import BookCard from "../components/BookCard";
 
 function SearchResults() {
+  const [searchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
+
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleSearch(event) {
-    event.preventDefault();
-
-    if (!query.trim()) {
-      setError("Please enter a hobby or topic to search.");
-      return;
+  useEffect(() => {
+    if (topic) {
+      setQuery(topic);
+      fetchBooks(topic);
     }
+  }, [topic]);
 
+  async function fetchBooks(searchTerm) {
     setLoading(true);
     setError("");
     setBooks([]);
 
     try {
-      const results = await searchBooks(query);
+      const results = await searchBooks(searchTerm);
       setBooks(results);
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -29,20 +33,33 @@ function SearchResults() {
       setLoading(false);
     }
   }
-  function handleSaveBook(book) {
-  const savedBooks = JSON.parse(localStorage.getItem("savedBooks")) || [];
 
-  const alreadySaved = savedBooks.some((savedBook) => savedBook.key === book.key);
+  function handleSearch(event) {
+    event.preventDefault();
 
-  if (!alreadySaved) {
-    const updatedBooks = [...savedBooks, book];
-    localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
-    alert("Saved to your stack!");
-  } else {
-    alert("This resource is already saved.");
+    if (!query.trim()) {
+      setError("Please enter a hobby or topic to search.");
+      return;
+    }
+
+    fetchBooks(query);
   }
-}
 
+  function handleSaveBook(book) {
+    const savedBooks = JSON.parse(localStorage.getItem("savedBooks")) || [];
+
+    const alreadySaved = savedBooks.some(
+      (savedBook) => savedBook.key === book.key
+    );
+
+    if (!alreadySaved) {
+      const updatedBooks = [...savedBooks, book];
+      localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
+      alert("Saved to your stack!");
+    } else {
+      alert("This resource is already saved.");
+    }
+  }
 
   return (
     <section>
@@ -69,8 +86,8 @@ function SearchResults() {
 
       <div className="book-grid">
         {books.map((book) => (
-  <BookCard key={book.key} book={book} onSave={handleSaveBook} />
-))}
+          <BookCard key={book.key} book={book} onSave={handleSaveBook} />
+        ))}
       </div>
     </section>
   );
