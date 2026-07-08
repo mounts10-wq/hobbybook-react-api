@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f6f7fb;
+  background: #d7e0f9;
   color: #222;
 }
 
@@ -54,7 +54,7 @@ body {
 
 .search-form button {
   padding: 0.75rem 1.25rem;
-  background: #2563eb;
+  background: #14367d;
   color: white;
   border: none;
   cursor: pointer;
@@ -116,12 +116,12 @@ body {
 }
 
 .save-button {
-  background: #16a34a;
+  background: #15803d;
   color: white;
 }
 
 .save-button:hover {
-  background: #15803d;
+  background: #16a34a;
 }
 
 .remove-button {
@@ -157,7 +157,7 @@ body {
 .hero-button {
   display: inline-block;
   background: white;
-  color: #1f2937;
+  color: #193dde;
   padding: 0.85rem 1.4rem;
   border-radius: 8px;
   text-decoration: none;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 
-function SavedStack() {
+function SavedBooks() {
   const [savedBooks, setSavedBooks] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function SavedStack() {
 
   return (
     <section>
-      <h1>Saved BookStack</h1>
+      <h1>Saved Books</h1>
       <p>Your saved hobby resources will appear here.</p>
 
       {savedBooks.length === 0 ? (
@@ -38,4 +38,4 @@ function SavedStack() {
   );
 }
 
-export default SavedStack;
+export default SavedBooks;
